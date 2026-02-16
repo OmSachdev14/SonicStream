@@ -1,11 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotufy/features/home/model/song_model.dart';
 
 part 'home_local_repository.g.dart';  
 @riverpod
-HomeLocalRepository  homeLocalRepository(Ref ref){
+HomeLocalRepository  homeLocalRepository(HomeLocalRepositoryRef ref){
   return HomeLocalRepository();
 }
 

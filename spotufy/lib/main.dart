@@ -20,8 +20,9 @@ Future<void> main() async {
   Hive.defaultDirectory = dir.path; 
   final container = ProviderContainer();
   await container.read(authViewmodelProvider.notifier).initSharedPreference();
+  // ignore: unused_local_variable
   final usermodel = await container.read(authViewmodelProvider.notifier).getData();
-  print(usermodel);
+  // print(usermodel);
   runApp(UncontrolledProviderScope(
     container: container,
     child: const MyApp(),

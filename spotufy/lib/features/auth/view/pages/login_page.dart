@@ -33,7 +33,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     final isLoading = ref
         .watch(authViewmodelProvider.select((val) => val?.isLoading == true));
-    print(isLoading);
+    // print(isLoading);
     ref.listen(authViewmodelProvider, (_, next) {
       next?.when(
           data: (data) {
@@ -43,7 +43,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 (route) => false);
           },
           error: (error, st) {
-            showSnackBar(context, error.toString());
+            showSnackBar(context, "Invalid credentials");
           },
           loading: () {});
     });
@@ -91,17 +91,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignupPage()),
+                          MaterialPageRoute(builder: (context) => const SignupPage()),
                         );
                       },
                       child: RichText(
                         text: TextSpan(
                           text: "Don't have an account? ",
                           style: Theme.of(context).textTheme.titleMedium,
-                          children: [
+                          children: const [
                             TextSpan(
                               text: "Sign Up",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Pallete.gradient2,
                                 fontWeight: FontWeight.bold,
                               ),

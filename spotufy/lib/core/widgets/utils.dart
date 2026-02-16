@@ -23,8 +23,8 @@ Future<File?> pickImage() async {
       type: FileType.image,
     );
     if (filePickerRes != null) {
-      print('yes');
-      print(filePickerRes.files.first.xFile.path);
+      // print('yes');
+      // print(filePickerRes.files.first.xFile.path);
       return File(filePickerRes.files.first.xFile.path);
     }
     return null;
@@ -40,7 +40,7 @@ Future<File?> pickAudio() async {
     );
 
     if (filePickerRes != null) {
-      print('yes1');
+      // print('yes1');
 
       return File(filePickerRes.files.first.path!);
     }

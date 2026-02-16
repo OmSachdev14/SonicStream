@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotufy/core/constants/server_constant.dart';
 import 'package:spotufy/core/failure/failure.dart';
@@ -11,7 +10,7 @@ import 'package:spotufy/features/home/model/song_model.dart';
 part 'home_repository.g.dart';
 
 @riverpod
-HomeRepository homeRepository(Ref ref) {
+HomeRepository homeRepository(HomeRepositoryRef ref) {
   return HomeRepository();
 }
 
@@ -100,7 +99,7 @@ class HomeRepository {
 
       // ✅ Only parse JSON for successful responses
       final resBodyMap = jsonDecode(res.body);
-      return Right(resBodyMap['message'] ?? true);
+      return Right(resBodyMap['message']?? false);
     } catch (e) {
       return Left(AppFailure(message: e.toString()));
     }
@@ -111,7 +110,7 @@ class HomeRepository {
   }) async {
     try {
       final res = await http
-          .get(Uri.parse('${ServerConstant.serverURL}/song/list'), headers: {
+          .get(Uri.parse('${ServerConstant.serverURL}/song/list/favorites'), headers: {
         'Content-detail': 'application/json',
         'x-auth-token': token
       });
@@ -123,12 +122,12 @@ class HomeRepository {
       }
       resBodyMap = resBodyMap as List;
 
-      List<SongModel> songs = [];
+      List<SongModel> favSongs = [];
 
       for (final map in resBodyMap) {
-        songs.add(SongModel.fromMap(map['song']));
+        favSongs.add(SongModel.fromMap(map['song']));
       }
-      return Right(songs);
+      return Right(favSongs);
     } catch (e) {
       return Left(AppFailure(message: e.toString()));
     }

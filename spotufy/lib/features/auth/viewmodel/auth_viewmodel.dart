@@ -1,7 +1,9 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:spotufy/core/providers/current_user_notifier.dart';
-import 'package:spotufy/features/auth/model/user_model.dart';
+import 'package:spotufy/core/models/user_model.dart';
 import 'package:spotufy/features/auth/repository/auth_local_repository.dart';
 import 'package:spotufy/features/auth/repository/auth_remote_repository.dart';
 
@@ -58,7 +60,7 @@ class AuthViewmodel extends _$AuthViewmodel {
     required String email,
     required String password,
   }) async {
-    state = AsyncValue.loading();
+    state = const AsyncValue.loading();
 
     final res = await _authRemoteRepository.signup(
       name: name,
@@ -70,12 +72,12 @@ class AuthViewmodel extends _$AuthViewmodel {
       Left(value: final l) => state = AsyncValue.error(l, StackTrace.current),
       Right(value: final r) => state = AsyncValue.data(r),
     };
-    print(val);
+    // print(val);
   }
 
   Future<void> loginUser(
       {required String email, required String password}) async {
-    state = AsyncValue.loading();
+    state = const AsyncValue.loading();
     final res =
         await _authRemoteRepository.login(email: email, password: password);
 
@@ -83,6 +85,6 @@ class AuthViewmodel extends _$AuthViewmodel {
       Left(value: final l) => state = AsyncValue.error(l, StackTrace.current),
       Right(value: final r) => _loginSuccessful(r),
     };
-    print(val);
+    // print(val);
   }
 }

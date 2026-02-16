@@ -18,8 +18,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   final pages = const [SongPage(), LibraryPage()];
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final currentUser = ref.watch(currentUserNotifierProvider);
-    print(currentUser);
+    // print(currentUser);
     return Scaffold(
       body: Stack(
         children: [

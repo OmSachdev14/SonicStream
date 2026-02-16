@@ -9,9 +9,9 @@ class AppTheme {
   static final darkThemeMode = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: Pallete.backgroundColor,
     inputDecorationTheme:InputDecorationTheme(
-      contentPadding: EdgeInsets.all(27 ),
+      contentPadding: const EdgeInsets.all(27 ),
       enabledBorder: _border(),
-      focusedBorder: _border().copyWith(borderSide: BorderSide(color: Pallete.gradient2,width: 3))
+      focusedBorder: _border().copyWith(borderSide: const BorderSide(color: Pallete.gradient2,width: 3))
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(backgroundColor: Pallete.backgroundColor)
   );

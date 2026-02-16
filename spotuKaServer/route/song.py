@@ -51,15 +51,15 @@ def list_songs(db: Session = Depends(get_db),
     return songs
 
 @router.post("/favorite")
-def favorite_song(song = FavoriteSong ,db: Session = Depends(get_db),auth_detail = Depends(auth_middleware)):
+def favorite_song(req: FavoriteSong ,db: Session = Depends(get_db),auth_detail = Depends(auth_middleware)):
     user_id = auth_detail['uid']
-    fav_song = db.query(Favorite).filter(Favorite.song_id == song.id, Favorite.user_id == user_id).first()
+    fav_song = db.query(Favorite).filter(Favorite.song_id == req.song_id, Favorite.user_id == user_id).first()
     if fav_song:
         db.delete(fav_song)
         db.commit()
         return {"message": False}
     else:
-        new_fav = Favorite(id = str(uuid.uuid4()), song_id = song.id, user_id = user_id)
+        new_fav = Favorite(id = str(uuid.uuid4()), song_id = req.song_id, user_id = user_id)
         db.add(new_fav)
         db.commit()
         

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spotufy/core/providers/current_song_notifier.dart';
+import 'package:spotufy/core/providers/current_user_notifier.dart';
 import 'package:spotufy/core/theme/app_pallete.dart';
 import 'package:spotufy/core/widgets/utils.dart';
 import 'package:spotufy/features/home/viewmodel/home_viewmodel.dart';
@@ -13,6 +14,8 @@ class MusicPlayer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentSong = ref.watch(currentSongNotifierProvider);
     final songNotifier = ref.read(currentSongNotifierProvider.notifier);
+    final userFavorites = ref.watch(currentUserNotifierProvider.select((data)=> data!.favorites));
+
 
     return Container(
       decoration: BoxDecoration(
@@ -26,7 +29,7 @@ class MusicPlayer extends ConsumerWidget {
         appBar: AppBar(
           backgroundColor: Pallete.transparentColor,
           leading: Transform.translate(
-            offset: Offset(-15, 0),
+            offset: const Offset(-15, 0),
             child: InkWell(
               onTap: () {
                 Navigator.pop(context);
@@ -74,14 +77,14 @@ class MusicPlayer extends ConsumerWidget {
                         children: [
                           Text(
                             currentSong.song_name,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Pallete.whiteColor,
                                 fontSize: 24,
                                 fontWeight: FontWeight.w700),
                           ),
                           Text(
                             currentSong.artist,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Pallete.subtitleText,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600),
@@ -94,9 +97,9 @@ class MusicPlayer extends ConsumerWidget {
                                 .read(homeViewmodelProvider.notifier)
                                 .favSong(songId: currentSong.id);
                           },
-                          icon: Icon(
-                            Icons.favorite_border,
-                            size: 32,
+                          icon: Icon(userFavorites.where((fav)=> fav.song_id == currentSong.id).toList().isNotEmpty? CupertinoIcons.heart_fill :
+                            Icons.favorite_border_outlined,
+                            size: 30,
                           ))
                     ],
                   ),
@@ -116,7 +119,7 @@ class MusicPlayer extends ConsumerWidget {
                         if (position != null && duration != null) {
                           sliderValue =
                               position.inMilliseconds / duration.inMilliseconds;
-                          print(sliderValue);
+                          // print(sliderValue);
                         }
                         return Column(
                           children: [
@@ -126,6 +129,7 @@ class MusicPlayer extends ConsumerWidget {
                                     thumbColor: Pallete.whiteColor,
                                     trackHeight: 4,
                                     inactiveTrackColor:
+                                        // ignore: deprecated_member_use
                                         Pallete.whiteColor.withOpacity(0.117),
                                     overlayShape:
                                         SliderComponentShape.noOverlay),
@@ -145,7 +149,7 @@ class MusicPlayer extends ConsumerWidget {
                                   position != null
                                       ? '${position.inMinutes}:${(position.inSeconds % 60).toString().padLeft(2, '0')}'
                                       : '0:00',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Pallete.subtitleText,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w300),
@@ -154,7 +158,7 @@ class MusicPlayer extends ConsumerWidget {
                                   duration != null
                                       ? '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}'
                                       : '0:00',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Pallete.subtitleText,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w300),
@@ -164,7 +168,7 @@ class MusicPlayer extends ConsumerWidget {
                           ],
                         );
                       }),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -212,7 +216,7 @@ class MusicPlayer extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Row(

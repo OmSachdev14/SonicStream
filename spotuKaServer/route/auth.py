@@ -10,6 +10,7 @@ from models.user import User
 from sqlalchemy.orm import Session
 from pydantic_schemas.user_login import UserLogin
 from pydantic_schemas.user_login import settings
+from sqlalchemy.orm import joinedload
 
 
 router = routing.APIRouter()
@@ -46,7 +47,7 @@ def login_User(user: UserLogin, db: Session = Depends(get_db)):
 
 @router.get('/')
 def currentUserData(db: Session = Depends(get_db), user_dict = Depends(auth_middleware.auth_middleware)):
-    user_db = db.query(User).filter(User.id == user_dict['uid']).first()
+    user_db = db.query(User).filter(User.id == user_dict['uid']).options(joinedload(User.favorites)).first()
     if not user_db:
         raise HTTPException(status_code=404, detail='User not found!')
     return user_db

@@ -8,7 +8,6 @@ import 'package:spotufy/core/theme/app_pallete.dart';
 import 'package:spotufy/core/widgets/custom_text_field.dart';
 import 'package:spotufy/core/widgets/loader.dart';
 import 'package:spotufy/core/widgets/utils.dart';
-import 'package:spotufy/features/home/repository/home_repository.dart';
 import 'package:spotufy/features/home/view/widget/audiowave.dart';
 import 'package:spotufy/features/home/viewmodel/home_viewmodel.dart';
 
@@ -31,7 +30,7 @@ class _UploadSongState extends ConsumerState<UploadSong> {
     final pickedFile = await pickAudio();
     if (pickedFile != null) {
       setState(() {
-        print('yes2');
+        // print('yes2');
 
         selectedAudio = pickedFile;
       });
@@ -40,13 +39,13 @@ class _UploadSongState extends ConsumerState<UploadSong> {
 
   void selectImage() async {
     final pickedFile = await pickImage();
-    print(pickedFile);
+    // print(pickedFile);
     if (pickedFile != null) {
       setState(() {
-        print('yes3');
+        // print('yes3');
         selectedImage = pickedFile;
       });
-      print(pickedFile.path);
+      // print(pickedFile.path);
     }
   }
 
@@ -106,8 +105,8 @@ class _UploadSongState extends ConsumerState<UploadSong> {
                           borderType: BorderType.RRect,
                           radius: const Radius.circular(10),
                           strokeCap: StrokeCap.round,
-                          dashPattern: [10, 4],
-                          child: SizedBox(
+                          dashPattern: const [10, 4],
+                          child: const SizedBox(
                             width: double.infinity,
                             height: 150,
                             child: Column(

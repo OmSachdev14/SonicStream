@@ -18,7 +18,9 @@ class CurrentSongNotifier extends _$CurrentSongNotifier {
   }
 
   void updateSong(SongModel song) async {
-    await audioPlayer?.dispose();
+    if (isPlaying){
+      audioPlayer!.stop();
+    }
     audioPlayer = AudioPlayer();
     final audioSource = AudioSource.uri(Uri.parse(song.song_url),
         tag: MediaItem(
