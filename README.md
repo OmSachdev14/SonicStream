@@ -1,13 +1,13 @@
-🎵 Spotify Clone - Full Stack Music Streaming App
+🎵 SonicStream - Full Stack Music Streaming App
 A production-ready music streaming application built using the MVVM architecture. This project features a cross-platform Flutter frontend and a high-performance FastAPI backend, delivering a seamless audio experience with real-time state management.
 
 📺 Project Demo
 
-[Pls Click the Here to see the demo](https://github.com/OmSachdev14/spotify_clone/blob/main/Screen-Recording-20260216-223756.MP4)
+(https://github.com/OmSachdev14/SonicStream/blob/fce072b41b3d237b28264f2fa1b2479333ad7aa1/Screen-Recording-20260216-223756.MP4)
 
 This version of the README.md is specifically designed to showcase your Full-Stack mastery. It emphasizes the MVVM architecture, high-performance FastAPI backend, and the sophisticated use of Riverpod—the exact details a senior Flutter developer or recruiter looks for to say, "Yes, this person knows Flutter."
 
-🎵 Full-Stack Spotify Clone: Flutter + FastAPI
+🎵 Full-Stack SonicStream: Flutter + FastAPI
 A high-performance, scalable music streaming platform built with Clean Architecture and MVVM. This project demonstrates professional-grade state management, cloud media integration, and a secure Python-based backend.
 
 📺 Application Demo
